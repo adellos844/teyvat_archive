@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Personaje
 
-# Create your views here.
+def home(request):
+    personajes = Personaje.objects.all()
+    return render(request, 'core/base.html',{'personajes': personajes})

@@ -1,0 +1,2 @@
+Superuser : admin
+Contraseña Superuser : xerecista

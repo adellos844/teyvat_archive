@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Teyvat Archive {% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/estilo1.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Inicio</a>{% if user.is_authenticaded %}
+        <span>¡Bienvenido a Teyvat Archive, {{user.username}}!</span>
+        <a href="{% url 'logout' %}">Salir</a>
+        {% else %}
+        <a href="{url 'login'}">Login</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
