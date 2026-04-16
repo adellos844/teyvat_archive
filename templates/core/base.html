@@ -1,24 +1,70 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} Teyvat Archive {% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'core/css/estilo1.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teyvat Archive</title>
+    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="{% url 'home' %}">Inicio</a>{% if user.is_authenticaded %}
-        <span>¡Bienvenido a Teyvat Archive, {{user.username}}!</span>
-        <a href="{% url 'logout' %}">Salir</a>
-        {% else %}
-        <a href="{url 'login'}">Login</a>
-        {% endif %}
-    </nav>
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">✨ Teyvat Archive</a>
+            <div class="nav-menu">
+                <a href="{% url 'home' %}">Personajes</a>
+                <a href="#">Armas</a>
+                {% if user.is_authenticated %}
+                    <span class="user-tag">Bienvenido, <strong>{{ user.username }}</strong></span>
+                    <a href="/admin" class="btn-secondary">Admin</a>
+                    <a href="{% url 'logout' %}" class="btn-auth">Salir</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Login</a>
+                    <a href="#" class="btn-auth">Registrarse</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
 
-    <main>
+    <main class="container">
         {% block content %}
+        <section class="hero">
+            <h1>Explora los personajes de Teyvat</h1>
+            <p>Descubre lore, builds y estadísticas actualizadas.</p>
+        </section>
+
+        <div class="grid">
+            {% for p in personaje %}
+                <article class="card {{ p.elemento|lower }}">
+                    <div class="card-img">
+                        {% if p.diseno_imagen %}
+                            <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x400" alt="Sin imagen">
+                        {% endif %}
+                        <span class="rarity">{{ p.rareza }}★</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>{{ p.nombre }}</h3>
+                        <span class="badge {{ p.elemento|lower }}">{{ p.elemento }}</span>
+                        <p>{{ p.lore|truncatewords:15 }}</p>
+                        <a href="#" class="btn-detail">Ver Detalles</a>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="empty-state">
+                    <p>No se encontraron viajeros. ¡Añade uno en el panel de control!</p>
+                </div>
+            {% endfor %}
+        </div>
         {% endblock %}
     </main>
+
+    <footer>
+        <p>&copy; 2026 Teyvat Archive</p>
+    </footer>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
 </body>
 </html>
