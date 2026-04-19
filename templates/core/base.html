@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="teyvat-app">
     <header>
         <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">✨ Teyvat Archive</a>
+            <a href="{% url 'home' %}" class="logo">✨ Teyvat <span>Archive</span></a>
             <div class="nav-menu">
                 <a href="{% url 'home' %}">Personajes</a>
                 <a href="#">Armas</a>
                 {% if user.is_authenticated %}
                     <span class="user-tag">Bienvenido, <strong>{{ user.username }}</strong></span>
-                    <a href="/admin" class="btn-secondary">Admin</a>
-                    <a href="{% url 'logout' %}" class="btn-auth">Salir</a>
+                    <a href="/admin" class="btn-admin">Admin</a>
+                    <form action="{% url 'logout' %}" method="post" class="form-logout">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout">Salir</button>
+                    </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn-login">Login</a>
-                    <a href="#" class="btn-auth">Registrarse</a>
+                    <a href="{% url 'register' %}" class="btn-auth">Registrarse</a>
                 {% endif %}
             </div>
         </nav>
@@ -35,7 +38,7 @@
         </section>
 
         <div class="grid">
-            {% for p in personaje %}
+            {% for p in personajes %}
                 <article class="card {{ p.elemento|lower }}">
                     <div class="card-img">
                         {% if p.diseno_imagen %}
@@ -65,6 +68,6 @@
         <p>&copy; 2026 Teyvat Archive</p>
     </footer>
 
-    <script src="{% static 'core/js/main.js' %}"></script>
+    <script src="{% static 'core/js/principal.js' %}"></script>
 </body>
 </html>
