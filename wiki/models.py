@@ -10,14 +10,22 @@ class Personaje(models.Model):
         ('Cryo', 'Cryo'),
         ('Dendro', 'Dendro')
     ]
-
+    Regiones = [
+        ('Mondstadt', 'Mondstadt'), ('Liyue', 'Liyue'), ('Inazuma', 'Inazuma'),
+        ('Sumeru', 'Sumeru'), ('Fontaine', 'Fontaine'), ('Natlan', 'Natlan'), ('Snezhnaya', 'Snezhnaya'),
+    ]
+    TIPOS_ARMA = [
+        ('Espada', 'Espada ligera'), ('Mandoble', 'Mandoble'), 
+        ('Lanza', 'Lanza'), ('Arco', 'Arco'), ('Catalizador', 'Catalizador'),
+    ]
     nombre = models.CharField(max_length=100)
     rareza = models.IntegerField(choices=[(4, '4 estrellas'), (5, '5 estrellas')])
     elemento = models.CharField(max_length=100, choices=Elementos)
-    tipo_arma = models.CharField(max_length=20)
+    tipo_arma = models.CharField(max_length=20, choices=TIPOS_ARMA, default='Espada')
     lore = models.TextField()
     diseno_imagen = models.ImageField(upload_to='personajes/disenos/')
-    enka_api_id = models.IntegerField(help_text="ID para conectar con Enkanetwork", unique=True)
+    region = models.CharField(max_length=20, choices=Regiones, default='Mondstadt')
+    slug = models.SlugField(unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.nombre

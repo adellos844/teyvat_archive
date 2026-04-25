@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404
 from .models import Personaje
 
 def home(request):
-    lista_personajes = Personaje.objects.all()
-    return render(request, 'core/base.html',{'personajes': lista_personajes})
+    personajes_recientes = Personaje.objects.all().order_by('-id')[:3]
+    return render(request, 'core/base.html', {'personajes': personajes_recientes})
 
 def register(request):
     if request.method == 'POST':
@@ -18,3 +19,11 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+def detalle_personaje(request, pk):
+    personaje = get_object_or_404(Personaje, pk=pk)
+    return render(request, 'wiki/detalle_personaje.html', {'p': personaje})
+
+def lista_personajes(request):
+    todos = Personaje.objects.all().order_by('nombre') 
+    return render(request, 'wiki/lista_personajes.html', {'personajes': todos})

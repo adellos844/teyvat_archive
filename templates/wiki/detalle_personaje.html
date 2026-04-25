@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="character-detail-wrapper">
+    <section class="detail-header">
+        <div class="detail-image-container">
+            {% if p.diseno_imagen %}
+                <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}" class="img-fluid">
+            {% endif %}
+        </div>
+        
+        <div class="detail-main-info">
+            <span class="region-label">{{ p.region }}</span>
+            <h1>{{ p.nombre }}</h1>
+            <div class="element-badge {{ p.elemento|lower }}">
+                {{ p.elemento }}
+            </div>
+            <div class="rarity-display">
+                {{ p.rareza }} ★
+            </div>
+            <div class="weapon-type">
+                <p><strong>Tipo de arma:</strong> {{ p.tipo_arma }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="detail-body">
+        <div class="lore-box">
+            <h3>Historia</h3>
+            <p>{{ p.lore }}</p>
+        </div>
+
+        <div class="builds-preview">
+            <h3>Mejores Builds</h3>
+            <p class="placeholder-text">Próximamente: Armas y Artefactos recomendados.</p>
+        </div>
+    </section>
+</div>
+{% endblock %}

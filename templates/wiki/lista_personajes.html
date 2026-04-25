@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-5" style="color: var(--accent);">Todos los Personajes</h1>
+    
+    <div class="grid">
+        {% for p in personajes %}
+            <div class="card">
+                <div class="card-img">
+                    {% if p.diseno_imagen %}
+                        <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}">
+                    {% endif %}
+                </div>
+                <div class="card-info">
+                    <h3>{{ p.nombre }}</h3>
+                    <p class="element-text {{ p.elemento|lower }}">{{ p.elemento }}</p>
+                    <a href="{% url 'detalle_personaje' p.id %}" class="btn-detail">Ver Detalles</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Aún no hay personajes añadidos.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

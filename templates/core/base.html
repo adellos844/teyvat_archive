@@ -11,14 +11,18 @@
 <body class="teyvat-app">
     <header>
         <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">✨ Teyvat <span>Archive</span></a>
+            <a href="{% url 'home' %}" class="logo"><div>✨ Teyvat Archive</div></a>
             <div class="nav-menu">
-                <a href="{% url 'home' %}">Personajes</a>
+                <a href="{% url 'lista_personajes' %}">Personajes</a>
                 <a href="#">Armas</a>
                 {% if user.is_authenticated %}
-                    <span class="user-tag">Bienvenido, <strong>{{ user.username }}</strong></span>
-                    <a href="/admin" class="btn-admin">Admin</a>
-                    <form action="{% url 'logout' %}" method="post" class="form-logout">
+                    <span class="user-tag">Hola, <strong>{{ user.username }}</strong></span>
+    
+                    {% if user.is_superuser %}
+                        <a href="/admin" class="btn-admin" style="color: var(--accent); font-weight: bold;">Panel Admin</a>
+                    {% endif %}
+
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn-logout">Salir</button>
                     </form>
@@ -30,6 +34,7 @@
         </nav>
     </header>
 
+    <main class="container">
     <main class="container">
         {% block content %}
         <section class="hero">
@@ -52,7 +57,7 @@
                         <h3>{{ p.nombre }}</h3>
                         <span class="badge {{ p.elemento|lower }}">{{ p.elemento }}</span>
                         <p>{{ p.lore|truncatewords:15 }}</p>
-                        <a href="#" class="btn-detail">Ver Detalles</a>
+                        <a href="{% url 'detalle_personaje' p.id %}" class="btn-detail">Ver Detalles</a>
                     </div>
                 </article>
             {% empty %}
@@ -62,10 +67,60 @@
             {% endfor %}
         </div>
         {% endblock %}
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="{% url 'lista_personajes' %}" class="btn-auth">Ver Todos los Personajes</a>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Teyvat Archive</p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Teyvat Archive</h3>
+                <p>Tu guía definitiva para explorar el mundo de Genshin Impact. Descubre personajes, armas, builds y mucho más. Desarrollada por Álvaro Delgado.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">Discord</a>
+                    <a href="#" class="social-link">Github</a>
+                    <a href="#" class="social-link">Linkedin</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="{% url 'lista_personajes' %}">Personajes</a></li>
+                    <li><a href="#">Armas</a></li>
+                    <li><a href="#">Artefactos</a></li>
+                    <li><a href="#">Builds</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Comunidad</h4>
+                <ul>
+                    <li><a href="#">Foro</a></li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Actualizaciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Cuenta</h4>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="/admin">Panel Admin</a></li>
+                        <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                        <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Teyvat Archive. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
     <script src="{% static 'core/js/principal.js' %}"></script>

@@ -66,12 +66,12 @@ header {
     gap: 10px;
 }
 
-.logo span {
-    color: var(--accent);
+.logo div {
+    color: var(--text);
     text-shadow: 0 0 20px rgba(212, 165, 116, 0.5);
 }
 
-.logo:hover span {
+.logo:hover div {
     text-shadow: 0 0 30px rgba(212, 165, 116, 0.8);
 }
 
@@ -145,9 +145,11 @@ header {
 
 .btn-auth,
 .btn-detail {
+    margin-top: auto;
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
     color: #1a1f3a !important;
     padding: 12px 28px;
+    text-align: center;
     border: 1px solid var(--accent);
     text-decoration: none;
     font-weight: 700;
@@ -256,6 +258,7 @@ header {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 28px;
     animation: fadeInUp 0.8s ease-out;
+    align-items: stretch;
 }
 
 .card {
@@ -264,6 +267,9 @@ header {
     overflow: hidden;
     border: 2px solid rgba(212, 165, 116, 0.2);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
                 inset 0 1px 0 rgba(212, 165, 116, 0.1);
@@ -375,7 +381,7 @@ header {
 .card-img {
     position: relative;
     width: 100%;
-    height: 380px;
+    height: 400px;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
 }
@@ -411,6 +417,9 @@ header {
     padding: 24px 20px;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     background: linear-gradient(180deg, rgba(26, 35, 50, 0.9) 0%, rgba(13, 17, 23, 0.95) 100%);
 }
 
@@ -442,6 +451,7 @@ header {
     letter-spacing: 1px;
     border: 1px solid currentColor;
     opacity: 0.9;
+    align-self: flex-start;
 }
 
 .badge.pyro {
@@ -512,6 +522,325 @@ footer p {
     margin: 0;
 }
 
+.auth-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+.auth-card {
+    background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 35, 50, 0.95) 100%);
+    border-radius: 16px;
+    border: 2px solid var(--border-accent);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(212, 165, 116, 0.1);
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(20px);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-header h2 {
+    color: var(--accent-light);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.auth-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.auth-form {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.8) 0%, rgba(26, 35, 50, 0.6) 100%);
+    border: 2px solid rgba(212, 165, 116, 0.3);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+    background: linear-gradient(135deg, rgba(26, 35, 50, 0.9) 0%, rgba(13, 17, 23, 0.8) 100%);
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.btn-register {
+    background: linear-gradient(135deg, var(--anemo) 0%, var(--hydro) 100%);
+    color: white !important;
+    padding: 14px 32px;
+    border: 1px solid var(--anemo);
+    font-weight: 700;
+    letter-spacing: 1px;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 4px;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(114, 213, 168, 0.4);
+}
+
+.auth-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-accent);
+}
+
+.auth-footer p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.auth-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: var(--accent-light);
+}
+
+.main-footer {
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(13, 17, 23, 0.98) 100%);
+    border-top: 2px solid var(--accent);
+    margin-top: 4rem;
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.footer-section h3 {
+    color: var(--accent-light);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.footer-section h4 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-section p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-section ul li a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-link {
+    color: var(--text-secondary) !important;
+    border: 2px solid var(--accent);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(212, 165, 116, 0.1);
+    color: var(--accent) !important;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 2rem 5% 1rem;
+    border-top: 1px solid var(--border-accent);
+    margin-top: 2rem;
+}
+
+.footer-bottom p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+
+
+html {
+    background: url('https://cdn.wallpapersafari.com/52/60/1XDEFW.jpg') center/cover no-repeat fixed;
+}
+
+body {
+    position: relative;
+    background: rgba(13, 17, 23, 0.4);
+}
+
+.navbar,
+.container,
+.main-footer {
+    position: relative;
+    z-index: 2;
+}
+.character-detail-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(26, 35, 50, 0.5);
+    border-radius: 20px;
+    border: 1px solid var(--border-accent);
+    backdrop-filter: blur(10px);
+}
+
+.detail-header {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.detail-image-container img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--accent);
+}
+
+.detail-main-info h1 {
+    font-size: 3.5rem;
+    color: var(--text);
+    margin: 0.5rem 0;
+}
+
+.region-label {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.element-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.element-badge.pyro { background: var(--pyro); }
+
+.element-badge.hydro { background: var(--hydro); }
+
+.element-badge.electro { background: var(--electro); }
+
+.element-badge.anemo { background: var(--anemo); }
+
+.element-badge.cryo { background: var(--cryo); color: #0d1117; }
+
+.element-badge.geo { background: var(--geo); }
+
+.element-badge.dendro { background: var(--dendro); }
+
+.detail-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.lore-box, .builds-preview {
+    background: rgba(13, 17, 23, 0.6);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 165, 116, 0.1);
+}
+
+.lore-box h3, .builds-preview h3 {
+    color: var(--accent-light);
+    margin-bottom: 1rem;
+}
 
 @keyframes fadeInDown {
     from {
