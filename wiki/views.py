@@ -2,11 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  UserCreationForm
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from .models import Arma, Personaje
+from .models import Arma, Banner, Personaje
 
 def home(request):
-    personajes_recientes = Personaje.objects.all().order_by('-id')[:3]
-    return render(request, 'core/base.html', {'personajes': personajes_recientes})
+    personajes_recientes = Personaje.objects.all().order_by('-id')[:4]
+    Armas_recientes = Arma.objects.all().order_by('-id')[:4]
+    banners = Banner.objects.filter(activo=True)
+    return render(request, 'wiki/home.html', {
+        'personajes': personajes_recientes,
+        'armas': Armas_recientes,
+        'banners': banners,
+    })
 
 def register(request):
     if request.method == 'POST':

@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="banners-section">
+        <div class="banners-container">
+            {% for b in banners %}
+            <div class="banner-item">
+                <img src="{{ b.imagen.url }}" alt="{{ b.nombre }}">
+                <div class="banner-overlay">
+                    <h2>{{ b.nombre }}</h2>
+                    <p>Gachapón Actual</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <section>
+        <h3>✨ Personajes Destacados</h3>
+        <div class="grid">
+            {% for p in personajes %}
+            <a href="{% url 'detalle_personaje' p.id %}" style="text-decoration: none; color: inherit;">
+                <div class="character-card">
+                    <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}">
+                    <h4>{{ p.nombre }}</h4>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <h3>⚔️ Últimas Armas</h3>
+        <div class="grid">
+            {% for a in armas %}
+            <div class="weapon-card">
+                <img src="{{ a.imagen.url }}" alt="{{ a.nombre }}">
+                <h4>{{ a.nombre }}</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">
+                    {% if a.rareza == 5 %}
+                        <span style="color: #ffd700;">★★★★★</span>
+                    {% elif a.rareza == 4 %}
+                        <span style="color: #a335ee;">★★★★</span>
+                    {% else %}
+                        <span style="color: #0070dd;">★★★</span>
+                    {% endif %}
+                    {{ a.tipo }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+{% endblock %}

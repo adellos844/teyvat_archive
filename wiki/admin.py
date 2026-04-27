@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Personaje, Arma ,Build
+from .models import Personaje, Arma ,Build, Banner
+
+admin.site.register(Banner)
 
 @admin.register(Personaje)
 class PersonajeAdmin(admin.ModelAdmin):

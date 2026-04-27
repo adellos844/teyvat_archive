@@ -64,3 +64,12 @@ class Build(models.Model):
 
     def __str__(self):
         return f"Build de {self.personaje.nombre}"
+    
+class Banner(models.Model):
+    nombre = models.CharField(max_length=100)
+    imagen = models.ImageField(upload_to='banners/')
+    activo = models.BooleanField(default=True) # Para decidir cuál mostrar y cuál ocultar
+    fecha_fin = models.DateTimeField(blank=True, null=True) # Opcional: para saber cuándo termina
+
+    def __str__(self):
+        return self.nombre
