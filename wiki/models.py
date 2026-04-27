@@ -30,12 +30,37 @@ class Personaje(models.Model):
     def __str__(self):
         return self.nombre
 
+class Arma(models.Model):
+    TIPOS_ARMA = [
+        ('Espada', 'Espada ligera'),
+        ('Mandoble', 'Mandoble'),
+        ('Lanza', 'Lanza'),
+        ('Arco', 'Arco'),
+        ('Catalizador', 'Catalizador'),
+    ]
+
+    nombre = models.CharField(max_length=100)
+    rareza = models.IntegerField(default=4)
+    tipo = models.CharField(max_length=20, choices=TIPOS_ARMA)
+    ataque_base = models.IntegerField()
+    substat_tipo = models.CharField(max_length=50, help_text="Ej: Daño Crítico, ATQ %")
+    substat_valor = models.CharField(max_length=20) 
+    imagen = models.ImageField(upload_to='armas/')
+    pasiva_nombre = models.CharField(max_length=100, blank=True)
+    pasiva_descripcion = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.nombre
 
 class Build(models.Model):
-    personaje = models.OneToOneField(Personaje, on_delete=models.CASCADE, related_name='build')
-    arma = models.CharField(max_length=100)
-    set_artefactos = models.CharField(max_length=200)
-    stats_principales = models.TextField(help_text="Reloj ATQ%, Caliz Daño Elemental, Corona Daño Critico")
+    personaje = models.ForeignKey(Personaje, on_delete=models.CASCADE, related_name='builds')
+    arma_recomendada = models.ForeignKey(Arma, on_delete=models.CASCADE)
+    
+    set_artefactos = models.CharField(max_length=200, help_text="Ej: 4 piezas de Sombra Verde Esmeralda")
+    stats_principales = models.CharField(max_length=255, help_text="Ej: ATQ% / Pyro / Crítico")
+    
+    mejor_opcion = models.BooleanField(default=False)
+    explicacion = models.TextField(blank=True)
 
     def __str__(self):
         return f"Build de {self.personaje.nombre}"

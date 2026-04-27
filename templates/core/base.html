@@ -14,7 +14,7 @@
             <a href="{% url 'home' %}" class="logo"><div>✨ Teyvat Archive</div></a>
             <div class="nav-menu">
                 <a href="{% url 'lista_personajes' %}">Personajes</a>
-                <a href="#">Armas</a>
+                <a href="{% url 'lista_armas' %}">Armas</a>
                 {% if user.is_authenticated %}
                     <span class="user-tag">Hola, <strong>{{ user.username }}</strong></span>
     
@@ -68,7 +68,9 @@
         </div>
         {% endblock %}
         <div style="text-align: center; margin-top: 3rem;">
-            <a href="{% url 'lista_personajes' %}" class="btn-auth">Ver Todos los Personajes</a>
+            {% if request.resolver_match.url_name == 'home' %}
+                <a href="{% url 'lista_personajes' %}" class="btn-auth">Ver todos los personajes</a>
+            {% endif %}
         </div>
     </main>
 
@@ -88,7 +90,7 @@
                 <h4>Enlaces Rápidos</h4>
                 <ul>
                     <li><a href="{% url 'lista_personajes' %}">Personajes</a></li>
-                    <li><a href="#">Armas</a></li>
+                    <li><a href="{% url 'lista_armas' %}">Armas</a></li>
                     <li><a href="#">Artefactos</a></li>
                     <li><a href="#">Builds</a></li>
                 </ul>

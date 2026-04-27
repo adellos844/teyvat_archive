@@ -1,38 +1,42 @@
 {% extends "core/base.html" %}
+
 {% block content %}
 <div class="character-detail-wrapper">
-    <section class="detail-header">
+    <div class="detail-header">
         <div class="detail-image-container">
-            {% if p.diseno_imagen %}
-                <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}" class="img-fluid">
+            {% if personaje.diseno_imagen %}
+                <img src="{{ personaje.diseno_imagen.url }}" alt="{{ personaje.nombre }}">
+            {% else %}
+                <p>No hay imagen disponible</p>
             {% endif %}
         </div>
-        
         <div class="detail-main-info">
-            <span class="region-label">{{ p.region }}</span>
-            <h1>{{ p.nombre }}</h1>
-            <div class="element-badge {{ p.elemento|lower }}">
-                {{ p.elemento }}
-            </div>
-            <div class="rarity-display">
-                {{ p.rareza }} ★
-            </div>
-            <div class="weapon-type">
-                <p><strong>Tipo de arma:</strong> {{ p.tipo_arma }}</p>
-            </div>
+            <span class="element-badge {{ personaje.elemento|lower }}">{{ personaje.elemento }}</span>
+            <h1>{{ personaje.nombre }}</h1>
+            <p class="region-label">{{ personaje.region }}</p>
         </div>
-    </section>
+    </div>
 
-    <section class="detail-body">
+    <div class="detail-body">
         <div class="lore-box">
             <h3>Historia</h3>
-            <p>{{ p.lore }}</p>
+            <p>{{ personaje.lore }}</p>
         </div>
 
         <div class="builds-preview">
-            <h3>Mejores Builds</h3>
-            <p class="placeholder-text">Próximamente: Armas y Artefactos recomendados.</p>
+            <h3>Mejores Equipamientos</h3>
+            {% for b in builds %}
+                <div class="build-card" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid var(--accent);">
+                    <h4>{{ b.arma_recomendada.nombre }} 
+                        {% if b.es_la_mejor_opcion %}<small>⭐ Best in Slot</small>{% endif %}
+                    </h4>
+                    <p><strong>Artefactos:</strong> {{ b.set_artefactos }}</p>
+                    <p><strong>Stats:</strong> {{ b.stats_principales }}</p>
+                </div>
+            {% empty %}
+                <p>No hay builds recomendadas aún.</p>
+            {% endfor %}
         </div>
-    </section>
+    </div>
 </div>
 {% endblock %}

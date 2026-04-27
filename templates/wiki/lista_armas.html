@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-5" style="color: var(--accent-light);">Arsenal de Armas</h1>
+    
+    <div class="controls-container">
+        <input type="text" id="searchInput" placeholder="Buscar arma..." class="search-bar">
+        
+        <div class="weapon-filters">
+            <button class="filter-btn active" data-type="all">Todos</button>
+            <button class="filter-btn" data-type="espada">Espada</button>
+            <button class="filter-btn" data-type="mandoble">Mandoble</button>
+            <button class="filter-btn" data-type="lanza">Lanza</button>
+            <button class="filter-btn" data-type="arco">Arco</button>
+            <button class="filter-btn" data-type="catalizador">Catalizador</button>
+        </div>
+    </div>
+    
+    <div class="grid">
+        {% for a in armas %}
+            <div class="character-card" data-name="{{ a.nombre|lower }}" data-type="{{ a.tipo|lower }}">
+                <div class="card-img" style="height: 250px;">
+                    {% if a.imagen %}
+                        <img src="{{ a.imagen.url }}" alt="{{ a.nombre }}" style="object-fit: contain; padding: 20px;">
+                    {% endif %}
+                </div>
+                
+                <div class="card-info">
+                    <h3>{{ a.nombre }}</h3>
+                    
+                    <span class="badge" style="background: var(--accent); color: #1a1f3a;">
+                        {{ a.tipo }}
+                    </span>
+                    
+                    <p>
+                        <strong>ATQ Base:</strong> {{ a.ataque_base }}<br>
+                        <strong>{{ a.substat_tipo }}:</strong> {{ a.substat_valor }}
+                    </p>
+                    
+                    {% if a.pasiva_nombre %}
+                        <div class="weapon-passive">
+                            <h5>Pasiva: {{ a.pasiva_nombre }}</h5>
+                            <p>{{ a.pasiva_descripcion }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-state">
+                <p>No hay armas registradas todavía.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
