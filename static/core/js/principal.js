@@ -20,34 +20,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.character-card');
 
-    function filterCharacters() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const activeElement = document.querySelector('.filter-btn.active').dataset.element;
+    if (searchInput && filterBtns.length > 0) {
+        function filterCharacters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeElement = document.querySelector('.filter-btn.active').dataset.element;
 
-        cards.forEach(card => {
-            const name = card.dataset.name;
-            const element = card.dataset.element;
-            
-            const matchesSearch = name.includes(searchTerm);
-            const matchesElement = activeElement === 'all' || element === activeElement;
+            cards.forEach(card => {
+                const name = card.dataset.name;
+                const element = card.dataset.element;
+                
+                const matchesSearch = name.includes(searchTerm);
+                const matchesElement = activeElement === 'all' || element === activeElement;
 
-            if (matchesSearch && matchesElement) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
+                if (matchesSearch && matchesElement) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterCharacters);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterCharacters();
+            });
         });
     }
-
-    searchInput.addEventListener('input', filterCharacters);
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            filterCharacters();
-        });
-    });
 });
 
 
@@ -84,6 +86,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.classList.add('active');
                 filterWeapons();
             });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    // Solo ejecutar si existe el hamburger (en móvil)
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.navbar')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
         });
     }
 });

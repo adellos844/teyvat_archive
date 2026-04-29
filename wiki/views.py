@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import  UserCreationForm
 from django.contrib import messages
+from .forms import RegistroForm 
 from django.shortcuts import render, get_object_or_404
 from .models import Arma, Banner, Personaje
+from django.contrib.auth.decorators import login_required
+from .utils import obtener_datos_enka
 
 def home(request):
     personajes_recientes = Personaje.objects.all().order_by('-id')[:4]
@@ -16,14 +18,18 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistroForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'¡Cuenta creada para {username}! Ya puedes iniciar sesión.')
+            messages.success(request, '¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.')
             return redirect('login')
+        else:
+            # Mostrar errores del formulario
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
-        form = UserCreationForm()
+        form = RegistroForm()
     return render(request, 'registration/register.html', {'form': form})
 
 def detalle_personaje(request, pk):
@@ -41,3 +47,21 @@ def lista_personajes(request):
 def lista_armas(request):
     armas = Arma.objects.all().order_by('-rareza', 'nombre')
     return render(request, 'wiki/lista_armas.html', {'armas': armas})
+
+@login_required
+def perfil_usuario(request):
+    perfil = request.user.perfil
+    datos_enka = obtener_datos_enka(perfil.uid_genshin)
+    
+    # Verificar si hay error
+    error = None
+    if isinstance(datos_enka, dict) and 'error' in datos_enka:
+        error = datos_enka['error']
+        datos_enka = None
+    
+    return render(request, 'wiki/perfil_usuario.html', {
+        'perfil': perfil,
+        'datos': datos_enka,
+        'error': error,
+        'uid': perfil.uid_genshin
+    })

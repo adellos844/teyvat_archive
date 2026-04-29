@@ -43,6 +43,21 @@
                 {% endif %}
             </div>
 
+            <div class="form-group">
+                {{ form.uid.label_tag }}
+                {{ form.uid }}
+                <small style="color: var(--text-secondary); display: block; margin-top: 0.5rem;">
+                    Tu UID debe ser de 9 dígitos y tu perfil debe estar visible en Genshin Impact.
+                </small>
+                {% if form.uid.errors %}
+                    <div class="error-message">
+                        {% for error in form.uid.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
             {% if form.non_field_errors %}
                 <div class="error-message">{{ form.non_field_errors.0 }}</div>
             {% endif %}

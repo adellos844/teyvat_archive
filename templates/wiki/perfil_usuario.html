@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="perfil-container" style="color: white; padding: 20px;">
+    <h1>Perfil de Jugador</h1>
+    
+    {% if error %}
+        <div style="background-color: #c0392b; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <p style="margin: 0; color: white;">
+                <strong>⚠️ Error:</strong> {{ error }}
+            </p>
+        </div>
+        <p style="color: #ecf0f1; margin-top: 10px;">
+            <strong>Soluciones:</strong>
+            <ul>
+                <li>Verifica que tu UID en Genshin Impact sea correcto (9 dígitos)</li>
+                <li>Abre Genshin Impact y ve a Configuración → Privacidad</li>
+                <li>Asegúrate que "Mostrar mi perfil en el juego" esté activado</li>
+                <li>Si acabas de cambiar la configuración, espera unos minutos</li>
+            </ul>
+        </p>
+    {% elif datos %}
+        <div class="genshin-card">
+            <div class="card-header">
+                <div class="user-info">
+                    <span class="uid-tag">UID: {{ uid }}</span>
+                    <h1 class="nickname">{{ datos.playerInfo.nickname }}</h1>
+                    <p class="signature">"{{ datos.playerInfo.signature }}"</p>
+                </div>
+                <div class="adventure-rank">
+                    <span class="rank-label">Rango de Aventura</span>
+                    <span class="rank-value">{{ datos.playerInfo.level }}</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-text">
+                            <span class="stat-title">Logros</span>
+                            <span class="stat-num">{{ datos.playerInfo.finishAchievementNum }}</span>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-text">
+                            <span class="stat-title">Nivel de Mundo</span>
+                            <span class="stat-num">{{ datos.playerInfo.worldLevel }}</span>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">⚔️</div>
+                        <div class="stat-text">
+                            <span class="stat-title">Abismo</span>
+                            <span class="stat-num">{{ datos.playerInfo.towerFloorIndex }}-{{ datos.playerInfo.towerLevelIndex }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p style="color: #f39c12;">Cargando datos...</p>
+    {% endif %}
+</div>
+{% endblock %}

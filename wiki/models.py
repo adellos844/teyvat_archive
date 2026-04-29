@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Personaje(models.Model):
     Elementos = [
@@ -68,8 +69,15 @@ class Build(models.Model):
 class Banner(models.Model):
     nombre = models.CharField(max_length=100)
     imagen = models.ImageField(upload_to='banners/')
-    activo = models.BooleanField(default=True) # Para decidir cuál mostrar y cuál ocultar
-    fecha_fin = models.DateTimeField(blank=True, null=True) # Opcional: para saber cuándo termina
+    activo = models.BooleanField(default=True) 
+    fecha_fin = models.DateTimeField(blank=True, null=True) 
 
     def __str__(self):
         return self.nombre
+
+class Perfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid_genshin = models.CharField(max_length=9, unique=True)
+
+    def __str__(self):
+        return self.usuario.username
