@@ -1033,6 +1033,11 @@ body {
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     position: relative;
+    padding: 20px;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+
 }
 
 .character-card::before {
@@ -1444,6 +1449,30 @@ body {
         width: 100%;
         padding: 20px 10%;
     }
+    .character-card {
+    background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 35, 50, 0.7) 100%);
+    border: 2px solid rgba(212, 165, 116, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: block;
+    height: 100%;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+
+}
+.character-card img {
+    width: 100%;
+    height: 675px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
 
     .container {
         padding: 1rem 0;
@@ -1492,7 +1521,6 @@ body {
     width: 100%;
     align-items: center;
     transition: transform 0.6s ease;
-    padding-left: 20%;
 }
 
 .character-card:hover img {
