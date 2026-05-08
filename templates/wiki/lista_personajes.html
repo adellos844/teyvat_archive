@@ -20,10 +20,12 @@
 
 <div class="grid">
     {% for p in personajes %}
-        <div class="character-card" data-name="{{ p.nombre|lower }}" data-element="{{ p.elemento|lower }}">
+        <div class="character-card element-{{ p.elemento|lower }}" data-name="{{ p.nombre|lower }}" data-element="{{ p.elemento|lower }}">
             <div class="card-img">
-                {% if p.diseno_imagen %}
-                    <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}">
+                {% if p.icono_imagen %}
+                    <img src="{{ p.icono_imagen.url }}" alt="{{ p.nombre }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x400" alt="{{ p.nombre }}">
                 {% endif %}
             </div>
             <div class="card-info">

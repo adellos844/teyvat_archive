@@ -26,12 +26,16 @@
         <div class="builds-preview">
             <h3>Mejores Equipamientos</h3>
             {% for b in builds %}
-                <div class="build-card" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid var(--accent);">
-                    <h4>{{ b.arma_recomendada.nombre }} 
-                        {% if b.es_la_mejor_opcion %}<small>⭐ Best in Slot</small>{% endif %}
-                    </h4>
+                <div class="build-card">
+                    <div class="build-card-header">
+                        <h4>{{ b.arma_recomendada.nombre }}{% if b.mejor_opcion %}{% endif %}</h4>
+                        <span class="build-tag build-tag-{{ b.categoria|lower }}">{{ b.get_categoria_display }}</span>
+                    </div>
                     <p><strong>Artefactos:</strong> {{ b.set_artefactos }}</p>
                     <p><strong>Stats:</strong> {{ b.stats_principales }}</p>
+                    {% if b.explicacion %}
+                        <p><strong>Recomendación:</strong> {{ b.explicacion }}</p>
+                    {% endif %}
                 </div>
             {% empty %}
                 <p>No hay builds recomendadas aún.</p>

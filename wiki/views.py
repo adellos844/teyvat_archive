@@ -1,13 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import RegistroForm 
-from django.shortcuts import render, get_object_or_404
-from .models import Arma, Banner, Personaje
+from .forms import RegistroForm
+from .models import Arma, Banner, Personaje, Build, TeamComposition
 from django.contrib.auth.decorators import login_required
 from .utils import obtener_datos_enka
 
 def home(request):
-    personajes_recientes = Personaje.objects.all().order_by('-id')[:4]
+    personajes_recientes = Personaje.objects.all().order_by('-id')[:8]
     Armas_recientes = Arma.objects.all().order_by('-id')[:4]
     banners = Banner.objects.filter(activo=True)
     return render(request, 'wiki/home.html', {
@@ -34,7 +33,7 @@ def register(request):
 
 def detalle_personaje(request, pk):
     personaje = get_object_or_404(Personaje, pk=pk)
-    builds = personaje.builds.all() 
+    builds = personaje.builds.select_related('arma_recomendada').all()
     return render(request, 'wiki/detalle_personaje.html', {
         'personaje': personaje,
         'builds': builds
@@ -47,6 +46,14 @@ def lista_personajes(request):
 def lista_armas(request):
     armas = Arma.objects.all().order_by('-rareza', 'nombre')
     return render(request, 'wiki/lista_armas.html', {'armas': armas})
+
+def lista_equipos(request):
+    equipos = TeamComposition.objects.all()
+    return render(request, 'wiki/lista_equipos.html', {'equipos': equipos})
+
+def detalle_equipo(request, pk):
+    equipo = get_object_or_404(TeamComposition, pk=pk)
+    return render(request, 'wiki/detalle_equipo.html', {'equipo': equipo})
 
 @login_required
 def perfil_usuario(request):

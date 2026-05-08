@@ -15,14 +15,15 @@
             {% endfor %}
         </div>
     </div>
-
     <section>
         <h3>✨ Personajes Destacados</h3>
-        <div class="grid">
+        <div class="grid home-characters">
             {% for p in personajes %}
             <a href="{% url 'detalle_personaje' p.id %}" style="text-decoration: none; color: inherit;">
-                <div class="character-card">
-                    <img src="{{ p.diseno_imagen.url }}" alt="{{ p.nombre }}">
+                <div class="character-card element-{{ p.elemento|lower }}">
+                    {% if p.icono_imagen %}
+                        <img src="{{ p.icono_imagen.url }}" alt="{{ p.nombre }}">
+                    {% endif %}
                     <h4>{{ p.nombre }}</h4>
                 </div>
             </a>

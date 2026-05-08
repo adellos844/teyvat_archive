@@ -1,0 +1,252 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-5" style="color: var(--accent);">Composiciones de Equipos</h1>
+    
+    <div class="teams-grid">
+        {% for equipo in equipos %}
+        <div class="team-card">
+            <div class="team-header">
+                <h3>{{ equipo.nombre }}</h3>
+                <span class="dificultad-badge dificultad-{{ equipo.dificultad }}">
+                    {% if equipo.dificultad == 1 %}
+                        ⭐ Fácil
+                    {% elif equipo.dificultad == 2 %}
+                        ⭐⭐ Media
+                    {% else %}
+                        ⭐⭐⭐ Difícil
+                    {% endif %}
+                </span>
+            </div>
+            
+            <p class="team-description">{{ equipo.descripcion }}</p>
+            
+            <div class="team-members">
+                <div class="team-member dps-principal">
+                    <div class="role-label">DPS Principal</div>
+                    <a href="{% url 'detalle_personaje' equipo.dps_principal.id %}">
+                        {% if equipo.dps_principal.icono_imagen %}
+                            <img src="{{ equipo.dps_principal.icono_imagen.url }}" alt="{{ equipo.dps_principal.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/70" alt="{{ equipo.dps_principal.nombre }}">
+                        {% endif %}
+                        <p>{{ equipo.dps_principal.nombre }}</p>
+                    </a>
+                </div>
+                
+                <div class="team-member sub-dps">
+                    <div class="role-label">Sub-DPS</div>
+                    <a href="{% url 'detalle_personaje' equipo.sub_dps.id %}">
+                        {% if equipo.sub_dps.icono_imagen %}
+                            <img src="{{ equipo.sub_dps.icono_imagen.url }}" alt="{{ equipo.sub_dps.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/70" alt="{{ equipo.sub_dps.nombre }}">
+                        {% endif %}
+                        <p>{{ equipo.sub_dps.nombre }}</p>
+                    </a>
+                </div>
+                
+                <div class="team-member soporte">
+                    <div class="role-label">Soporte</div>
+                    <a href="{% url 'detalle_personaje' equipo.soporte.id %}">
+                        {% if equipo.soporte.icono_imagen %}
+                            <img src="{{ equipo.soporte.icono_imagen.url }}" alt="{{ equipo.soporte.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/70" alt="{{ equipo.soporte.nombre }}">
+                        {% endif %}
+                        <p>{{ equipo.soporte.nombre }}</p>
+                    </a>
+                </div>
+                
+                <div class="team-member curativo">
+                    <div class="role-label">Curativo</div>
+                    <a href="{% url 'detalle_personaje' equipo.curativo.id %}">
+                        {% if equipo.curativo.icono_imagen %}
+                            <img src="{{ equipo.curativo.icono_imagen.url }}" alt="{{ equipo.curativo.nombre }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/70" alt="{{ equipo.curativo.nombre }}">
+                        {% endif %}
+                        <p>{{ equipo.curativo.nombre }}</p>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="{% url 'detalle_equipo' equipo.id %}" class="btn-detail">Ver Sinergia</a>
+        </div>
+        {% empty %}
+        <p>No hay equipos disponibles aún.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.team-card {
+    background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 35, 50, 0.7) 100%);
+    border: 2px solid rgba(212, 165, 116, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 165, 116, 0.2);
+}
+
+.team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.team-header h3 {
+    margin: 0;
+    color: var(--accent-light);
+    font-size: 1.3rem;
+}
+
+.dificultad-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.dificultad-1 {
+    background: rgba(114, 213, 168, 0.2);
+    color: #72d5a8;
+    border: 1px solid #72d5a8;
+}
+
+.dificultad-2 {
+    background: rgba(255, 184, 77, 0.2);
+    color: #ffb84d;
+    border: 1px solid #ffb84d;
+}
+
+.dificultad-3 {
+    background: rgba(255, 107, 66, 0.2);
+    color: #ff6b42;
+    border: 1px solid #ff6b42;
+}
+
+.team-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.team-member {
+    text-align: center;
+    position: relative;
+}
+
+.team-member a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.team-member img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid rgba(212, 165, 116, 0.4);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover img {
+    border-color: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 165, 116, 0.4);
+}
+
+.team-member p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.role-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dps-principal {
+    border: 1px solid rgba(255, 107, 66, 0.3);
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: rgba(255, 107, 66, 0.05);
+}
+
+.sub-dps {
+    border: 1px solid rgba(77, 166, 255, 0.3);
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: rgba(77, 166, 255, 0.05);
+}
+
+.soporte {
+    border: 1px solid rgba(114, 213, 168, 0.3);
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: rgba(114, 213, 168, 0.05);
+}
+
+.curativo {
+    border: 1px solid rgba(191, 145, 255, 0.3);
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: rgba(191, 145, 255, 0.05);
+}
+
+.btn-detail {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(212, 165, 116, 0.1));
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.btn-detail:hover {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.4), rgba(212, 165, 116, 0.2));
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+}
+</style>
+{% endblock %}

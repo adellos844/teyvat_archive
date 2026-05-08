@@ -250,6 +250,68 @@ header {
     box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
 }
 
+.build-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    border: 1px solid rgba(212, 165, 116, 0.2);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.build-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+}
+
+.build-card h4 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--accent-light);
+}
+
+.build-card small {
+    color: #ffd86c;
+    font-size: 0.85rem;
+    margin-left: 0.35rem;
+}
+
+.build-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1a1f3a;
+    background: #f5f5f5;
+}
+
+.build-tag-dps {
+    background: rgba(255, 107, 66, 0.16);
+    color: #ff6b42;
+}
+
+.build-tag-sub_dps {
+    background: rgba(77, 166, 255, 0.16);
+    color: #4da6ff;
+}
+
+.build-tag-soporte {
+    background: rgba(114, 213, 168, 0.16);
+    color: #72d5a8;
+}
+
+.build-tag-curativo {
+    background: rgba(191, 145, 255, 0.16);
+    color: #bf91ff;
+}
+
 .hero {
     text-align: center;
     padding: 4rem 2rem;
@@ -285,8 +347,8 @@ header {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
     animation: fadeInUp 0.8s ease-out;
     align-items: stretch;
 }
@@ -411,7 +473,7 @@ header {
 .card-img {
     position: relative;
     width: 100%;
-    height: 400px;
+    aspect-ratio: 1;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
 }
@@ -419,8 +481,9 @@ header {
 .card-img img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.6s ease;
+    padding: 10px;
 }
 
 .card:hover .card-img img {
@@ -813,9 +876,14 @@ body {
     margin-bottom: 3rem;
 }
 
+.detail-image-container {
+    width: 100%;
+    aspect-ratio: 4/5;
+}
+
 .detail-image-container img {
     width: 100%;
-    max-height: 600px;
+    height: 100%;
     object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
@@ -1033,10 +1101,6 @@ body {
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     position: relative;
-    padding: 20px;
-    gap: 12px;
-    align-items: center;
-    text-align: center;
 
 }
 
@@ -1066,9 +1130,14 @@ body {
 
 .character-card img {
     width: 100%;
-    height: 350px;
-    object-fit: cover;
+    aspect-ratio: 9/10;
+    object-fit: contain;
     transition: transform 0.6s ease;
+    padding: 15px;
+}
+
+.home-characters .character-card img {
+    height: 200px;
 }
 
 .character-card:hover img {
@@ -1081,6 +1150,77 @@ body {
     color: var(--accent-light);
     font-size: 1.2rem;
     text-align: center;
+}
+
+/* Estilos por Elemento */
+.character-card.element-pyro {
+    border-color: rgba(255, 107, 66, 0.4);
+    background: linear-gradient(135deg, rgba(255, 107, 66, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-pyro:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 107, 66, 0.4);
+    border-color: rgba(255, 107, 66, 0.8);
+}
+
+.character-card.element-hydro {
+    border-color: rgba(77, 166, 255, 0.4);
+    background: linear-gradient(135deg, rgba(77, 166, 255, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-hydro:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(77, 166, 255, 0.4);
+    border-color: rgba(77, 166, 255, 0.8);
+}
+
+.character-card.element-electro {
+    border-color: rgba(191, 145, 255, 0.4);
+    background: linear-gradient(135deg, rgba(191, 145, 255, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-electro:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(191, 145, 255, 0.4);
+    border-color: rgba(191, 145, 255, 0.8);
+}
+
+.character-card.element-anemo {
+    border-color: rgba(114, 213, 168, 0.4);
+    background: linear-gradient(135deg, rgba(114, 213, 168, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-anemo:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(114, 213, 168, 0.4);
+    border-color: rgba(114, 213, 168, 0.8);
+}
+
+.character-card.element-cryo {
+    border-color: rgba(179, 229, 252, 0.4);
+    background: linear-gradient(135deg, rgba(179, 229, 252, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-cryo:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(179, 229, 252, 0.4);
+    border-color: rgba(179, 229, 252, 0.8);
+}
+
+.character-card.element-geo {
+    border-color: rgba(255, 184, 77, 0.4);
+    background: linear-gradient(135deg, rgba(255, 184, 77, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-geo:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 184, 77, 0.4);
+    border-color: rgba(255, 184, 77, 0.8);
+}
+
+.character-card.element-dendro {
+    border-color: rgba(124, 179, 66, 0.4);
+    background: linear-gradient(135deg, rgba(124, 179, 66, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+}
+
+.character-card.element-dendro:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(124, 179, 66, 0.4);
+    border-color: rgba(124, 179, 66, 0.8);
 }
 
 .dashboard {
@@ -1106,11 +1246,12 @@ body {
     overflow-x: auto; 
     padding-bottom: 20px;
     margin-bottom: 30px;
+    justify-content: center;
 }
 
 .banner-item img {
     width: 100%;
-    max-width: 600px; 
+    max-width: 500px; 
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     transition: transform 0.3s;
@@ -1444,35 +1585,23 @@ body {
     }
 
     .grid {
-        grid-template-columns: 1fr;
-        gap: 80px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
         width: 100%;
-        padding: 20px 10%;
+        padding: 20px 5%;
     }
-    .character-card {
-    background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 35, 50, 0.7) 100%);
-    border: 2px solid rgba(212, 165, 116, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
-    flex-direction: block;
-    height: 100%;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    position: relative;
-    gap: 12px;
-    align-items: center;
-    text-align: center;
-    width: 100%;
 
-}
-.character-card img {
-    width: 100%;
-    height: 675px;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
+    .character-card img {
+        width: 100%;
+        aspect-ratio: 9/10;
+        object-fit: contain;
+        transition: transform 0.6s ease;
+        padding: 10px;
+    }
+
+    .home-characters .character-card img {
+        aspect-ratio: 1;
+    }
 
     .container {
         padding: 1rem 0;
@@ -1503,29 +1632,7 @@ body {
         grid-template-columns: 1fr;
     }
 }
-.card {
-    background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 35, 50, 0.7) 100%);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 2px solid rgba(212, 165, 116, 0.2);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
-    flex-direction: column;
-    height: 50%;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(212, 165, 116, 0.1);
-    position: relative;
-}
-.character-card img {
-    width: 100%;
-    align-items: center;
-    transition: transform 0.6s ease;
-}
 
-.character-card:hover img {
-    transform: scale(1.1);
-}
 
 
 @media (max-width: 768px) {
@@ -1581,7 +1688,12 @@ body {
 
     .grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
+        padding: 0 5%;
+    }
+
+    .character-card img {
+        aspect-ratio: 9/10;
     }
 
     .container {
@@ -1635,8 +1747,12 @@ body {
         font-size: 1rem;
     }
 
-    .card {
-        margin-bottom: 10px;
+    .grid {
+        gap: 12px;
+    }
+
+    .character-card img {
+        aspect-ratio: 4/5;
     }
 
     .btn-auth,
@@ -1674,5 +1790,29 @@ body {
 
     .detail-main-info h1 {
         font-size: 2rem;
+    }
+}
+
+/* Mejoras adicionales para imágenes responsive */
+@media (max-width: 640px) {
+    .detail-image-container {
+        aspect-ratio: 3/4;
+        margin-bottom: 1.5rem;
+    }
+
+    .detail-header {
+        padding: 0;
+    }
+
+    .character-card {
+        border-radius: 8px;
+    }
+
+    .card-img {
+        aspect-ratio: 1;
+    }
+
+    .home-characters .character-card img {
+        aspect-ratio: 3/4;
     }
 }

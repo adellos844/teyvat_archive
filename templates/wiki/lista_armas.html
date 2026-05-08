@@ -19,9 +19,9 @@
     <div class="grid">
         {% for a in armas %}
             <div class="character-card" data-name="{{ a.nombre|lower }}" data-type="{{ a.tipo|lower }}">
-                <div class="card-img" style="height: 250px;">
+                <div class="card-img">
                     {% if a.imagen %}
-                        <img src="{{ a.imagen.url }}" alt="{{ a.nombre }}" style="object-fit: contain; padding: 20px;">
+                        <img src="{{ a.imagen.url }}" alt="{{ a.nombre }}">
                     {% endif %}
                 </div>
                 

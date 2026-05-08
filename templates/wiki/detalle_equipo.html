@@ -1,0 +1,323 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <a href="{% url 'lista_equipos' %}" class="btn-back">&larr; Volver a Equipos</a>
+    
+    <div class="team-detail-wrapper">
+        <div class="team-detail-header">
+            <h1>{{ equipo.nombre }}</h1>
+            <span class="dificultad-detail dificultad-{{ equipo.dificultad }}">
+                {% if equipo.dificultad == 1 %}
+                    ⭐ Fácil
+                {% elif equipo.dificultad == 2 %}
+                    ⭐⭐ Media
+                {% else %}
+                    ⭐⭐⭐ Difícil
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="team-overview">
+            <p>{{ equipo.descripcion }}</p>
+        </div>
+
+        <div class="team-members-detail">
+            <div class="member-detail dps-principal-detail">
+                <div class="member-role">DPS Principal</div>
+                <a href="{% url 'detalle_personaje' equipo.dps_principal.id %}">
+                    {% if equipo.dps_principal.icono_imagen %}
+                        <img src="{{ equipo.dps_principal.icono_imagen.url }}" alt="{{ equipo.dps_principal.nombre }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120" alt="{{ equipo.dps_principal.nombre }}">
+                    {% endif %}
+                    <h3>{{ equipo.dps_principal.nombre }}</h3>
+                    <p class="elemento element-{{ equipo.dps_principal.elemento|lower }}">{{ equipo.dps_principal.elemento }}</p>
+                </a>
+            </div>
+
+            <div class="member-detail sub-dps-detail">
+                <div class="member-role">Sub-DPS</div>
+                <a href="{% url 'detalle_personaje' equipo.sub_dps.id %}">
+                    {% if equipo.sub_dps.icono_imagen %}
+                        <img src="{{ equipo.sub_dps.icono_imagen.url }}" alt="{{ equipo.sub_dps.nombre }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120" alt="{{ equipo.sub_dps.nombre }}">
+                    {% endif %}
+                    <h3>{{ equipo.sub_dps.nombre }}</h3>
+                    <p class="elemento element-{{ equipo.sub_dps.elemento|lower }}">{{ equipo.sub_dps.elemento }}</p>
+                </a>
+            </div>
+
+            <div class="member-detail soporte-detail">
+                <div class="member-role">Soporte</div>
+                <a href="{% url 'detalle_personaje' equipo.soporte.id %}">
+                    {% if equipo.soporte.icono_imagen %}
+                        <img src="{{ equipo.soporte.icono_imagen.url }}" alt="{{ equipo.soporte.nombre }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120" alt="{{ equipo.soporte.nombre }}">
+                    {% endif %}
+                    <h3>{{ equipo.soporte.nombre }}</h3>
+                    <p class="elemento element-{{ equipo.soporte.elemento|lower }}">{{ equipo.soporte.elemento }}</p>
+                </a>
+            </div>
+
+            <div class="member-detail curativo-detail">
+                <div class="member-role">Curativo</div>
+                <a href="{% url 'detalle_personaje' equipo.curativo.id %}">
+                    {% if equipo.curativo.icono_imagen %}
+                        <img src="{{ equipo.curativo.icono_imagen.url }}" alt="{{ equipo.curativo.nombre }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120" alt="{{ equipo.curativo.nombre }}">
+                    {% endif %}
+                    <h3>{{ equipo.curativo.nombre }}</h3>
+                    <p class="elemento element-{{ equipo.curativo.elemento|lower }}">{{ equipo.curativo.elemento }}</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="sinergia-section">
+            <h2>✨ Sinergia del Equipo</h2>
+            <div class="sinergia-box">
+                <p>{{ equipo.sinergia_description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-back {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: rgba(212, 165, 116, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    background: rgba(212, 165, 116, 0.2);
+    box-shadow: 0 0 15px rgba(212, 165, 116, 0.3);
+}
+
+.team-detail-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.team-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(212, 165, 116, 0.3);
+}
+
+.team-detail-header h1 {
+    margin: 0;
+    color: var(--accent-light);
+    font-size: 2.5rem;
+}
+
+.dificultad-detail {
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dificultad-1 {
+    background: rgba(114, 213, 168, 0.2);
+    color: #72d5a8;
+    border: 2px solid #72d5a8;
+}
+
+.dificultad-2 {
+    background: rgba(255, 184, 77, 0.2);
+    color: #ffb84d;
+    border: 2px solid #ffb84d;
+}
+
+.dificultad-3 {
+    background: rgba(255, 107, 66, 0.2);
+    color: #ff6b42;
+    border: 2px solid #ff6b42;
+}
+
+.team-overview {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.05) 0%, rgba(26, 35, 50, 0.7) 100%);
+    border: 1px solid rgba(212, 165, 116, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.team-members-detail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.member-detail {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 35, 50, 0.7) 100%);
+    border: 2px solid rgba(212, 165, 116, 0.3);
+    transition: all 0.3s ease;
+}
+
+.member-detail:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.member-detail a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.member-role {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.member-detail img {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid rgba(212, 165, 116, 0.5);
+    transition: all 0.3s ease;
+}
+
+.member-detail:hover img {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(212, 165, 116, 0.4);
+    transform: scale(1.05);
+}
+
+.member-detail h3 {
+    margin: 0.5rem 0 0.3rem 0;
+    color: var(--accent-light);
+    font-size: 1.3rem;
+}
+
+.elemento {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 0.3rem;
+}
+
+.element-pyro {
+    background: rgba(255, 107, 66, 0.2);
+    color: #ff6b42;
+}
+
+.element-hydro {
+    background: rgba(77, 166, 255, 0.2);
+    color: #4da6ff;
+}
+
+.element-electro {
+    background: rgba(191, 145, 255, 0.2);
+    color: #bf91ff;
+}
+
+.element-anemo {
+    background: rgba(114, 213, 168, 0.2);
+    color: #72d5a8;
+}
+
+.element-cryo {
+    background: rgba(179, 229, 252, 0.2);
+    color: #b3e5fc;
+}
+
+.element-geo {
+    background: rgba(255, 184, 77, 0.2);
+    color: #ffb84d;
+}
+
+.element-dendro {
+    background: rgba(124, 179, 66, 0.2);
+    color: #7cb342;
+}
+
+.dps-principal-detail {
+    border-color: rgba(255, 107, 66, 0.4);
+}
+
+.sub-dps-detail {
+    border-color: rgba(77, 166, 255, 0.4);
+}
+
+.soporte-detail {
+    border-color: rgba(114, 213, 168, 0.4);
+}
+
+.curativo-detail {
+    border-color: rgba(191, 145, 255, 0.4);
+}
+
+.sinergia-section {
+    margin-top: 2rem;
+}
+
+.sinergia-section h2 {
+    color: var(--accent-light);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.sinergia-box {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(26, 35, 50, 0.7) 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 2rem;
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 1.05rem;
+    box-shadow: 0 10px 30px rgba(212, 165, 116, 0.1);
+}
+
+@media (max-width: 768px) {
+    .team-detail-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .team-members-detail {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .member-detail img {
+        width: 100px;
+        height: 100px;
+    }
+}
+</style>
+{% endblock %}
