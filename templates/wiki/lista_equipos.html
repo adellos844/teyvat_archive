@@ -248,5 +248,48 @@
     background: linear-gradient(135deg, rgba(212, 165, 116, 0.4), rgba(212, 165, 116, 0.2));
     box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
 }
+
+@media (max-width: 768px) {
+    .teams-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .team-card {
+        padding: 1rem;
+    }
+
+    .team-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .team-members {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .team-member {
+        padding: 0.5rem;
+    }
+
+    .team-member img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .team-member p {
+        font-size: 0.8rem;
+    }
+
+    .role-label {
+        font-size: 0.7rem;
+    }
+
+    .dificultad-badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
 </style>
 {% endblock %}
