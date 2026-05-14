@@ -127,3 +127,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+ALLOWED_HOSTS = ['teyvat-archive.onrender.com', 'localhost', '127.0.0.1']
