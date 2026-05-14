@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%5hgein6eg-@29(%$pmw743bk5ux0*qopi-vio_!0f$eac7slc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['teyvat-archive.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -127,4 +127,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
-ALLOWED_HOSTS = ['teyvat-archive.onrender.com', 'localhost', '127.0.0.1']
