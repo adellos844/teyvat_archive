@@ -58,66 +58,61 @@ python manage.py runserver
 
 Accedemos a la aplicación a través de: http://127.0.0.1:8000/
 
+---
 
 ### Estructura del Repositorio
-
+<pre>
 teyvat_archive/
-│
-├── core/                               # Configuración principal del proyecto Django
+├── core/
 │   ├── __init__.py
-│   ├── asgi.py                         # Configuración para servidores ASGI
-│   ├── settings.py                     # Configuración general y variables de entorno
-│   ├── urls.py                         # Enrutador principal de la plataforma
-│   └── wsgi.py                         # Punto de entrada para servidores WSGI (Gunicorn)
-│
-├── media/                              # Archivos multimedia dinámicos de la Wiki
-│   ├── armas/                          # Imágenes de armas del juego
-│   ├── banners/                        # Arte y banners promocionales de cabecera
-│   └── personajes/                     # Almacenamiento de imágenes de personajes
-│       ├── disenos/                    # Diseños e ilustraciones a cuerpo completo
-│       └── icons/                      # Iconos de interfaz y perfil de personajes
-│
-├── static/core/                        # Archivos estáticos globales del sistema
-│   ├── css/                            # Hojas de estilo CSS3
-│   └── js/                             # JavaScript para interactividad de filtros y búsquedas
-│
-├── templates/                          # Capa de presentación 
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── media/
+│   ├── armas/
+│   ├── banners/
+│   └── personajes/
+│       ├── disenos/
+│       └── icons/
+├── static/core/
+│   ├── css/
+│   └── js/
+├── templates/
 │   ├── core/
-│   │   └── base.html                   # Esqueleto estructural compartido por la web
-│   ├── registration/                   # Plantillas para el módulo de autenticación
-│   │   ├── login.html                  # Formulario de inicio de sesión
-│   │   └── register.html               # Formulario de registro de nuevos usuarios
-│   └── wiki/                           # Vistas de contenido dinámico del videojuego
-│       ├── detalle_equipo.html         # Ficha avanzada de builds y sinergias de equipo
-│       ├── detalle_personaje.html      # Ficha técnica y estadísticas individuales
-│       ├── home.html                   # Página de inicio/bienvenida de la Wiki
-│       ├── lista_armas.html            # Catálogo interactivo de armas disponibles
-│       ├── lista_equipos.html          # Listado general de composiciones recomendadas
-│       ├── lista_personajes.html       # Módulo principal con rejilla de personajes
-│       └── perfil_usuario.html         # Gestión del perfil del usuario
-│
-├── wiki/                               # Aplicación modular dedicada a la lógica del juego
-│   ├── migrations/                     # Historial de versiones del esquema de base de datos
+│   │   └── base.html
+│   ├── registration/
+│   │   ├── login.html
+│   │   └── register.html
+│   └── wiki/
+│       ├── detalle_equipo.html
+│       ├── detalle_personaje.html
+│       ├── home.html
+│       ├── lista_armas.html
+│       ├── lista_equipos.html
+│       ├── lista_personajes.html
+│       └── perfil_usuario.html
+├── wiki/
+│   ├── migrations/
 │   ├── __init__.py
-│   ├── admin.py                        # Configuración y personalización del Django Admin
-│   ├── apps.py                         # Configuración interna de la aplicación wiki
-│   ├── forms.py                        # Definición de formularios de la aplicación
-│   ├── models.py                       # Modelado relacional (Personajes, Elementos, Armas)
-│   ├── tests.py                        # Pruebas unitarias y de integración
-│   ├── urls.py                         # Enrutamiento modular específico de la wiki
-│   ├── utils.py                        # Lógica interna y funciones del Web Scraper
-│   └── views.py                        # Controladores MVT que conectan modelos y templates
-│
-├── .dockerignore                       # Exclusiones de archivos para la imagen Docker
-├── crear_admin.py                      # Script auxiliar de automatización para cuentas
-├── db.sqlite3                          # Base de datos local (solo para entorno sin Docker)
-├── docker-compose.yml                  # Configuración de orquestación (App + PostgreSQL)
-├── Dockerfile                          # Instrucciones de construcción de entorno (Python 3.12)
-├── manage.py                           # Utilidad de comandos CLI de Django
-├── README.md                           # Documentación del proyecto
-├── requirements.txt                    # Lista de dependencias del ecosistema Python
-└── superuser.txt                       # Datos superusuario
-
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   ├── utils.py
+│   └── views.py
+├── .dockerignore
+├── crear_admin.py
+├── db.sqlite3
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+├── README.md
+├── requirements.txt
+└── superuser.txt
+</pre>
 
 ---
 
