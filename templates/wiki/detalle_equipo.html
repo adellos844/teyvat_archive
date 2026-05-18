@@ -304,10 +304,18 @@
 }
 
 @media (max-width: 768px) {
+    .team-detail-wrapper {
+        padding: 1rem;
+    }
+
     .team-detail-header {
         flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
+    }
+
+    .team-detail-header h1 {
+        font-size: 2rem;
     }
 
     .team-members-detail {
@@ -317,6 +325,20 @@
     .member-detail img {
         width: 100px;
         height: 100px;
+    }
+}
+
+@media (max-width: 640px) {
+    .team-members-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .team-detail-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .sinergia-box {
+        padding: 1.5rem;
     }
 }
 </style>
