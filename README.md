@@ -2,6 +2,9 @@
 
 Teyvat archive es una plataforma web informativa diseñada para facilitar la gestión de datos y recursos sobre el videojuego Genshin Impact. El sistema funciona como una base de datos interactiva donde los usuarios pueden consultar fichas técnicas detalladas de los personajes, clasificándolos según su región, elemento y rareza, además de acceder a guías de equipamiento óptimo (builds) que sugieren las mejores combinaciones de armas y artefactos para cada rol de combate.
 
+### URL de la página:
+teyvat-archive.onrender.com
+
 ## Características
 
 - **Catálogo Completo:** Consulta detallada de personajes filtrados por región, elemento y rareza.
